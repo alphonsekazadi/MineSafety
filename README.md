@@ -1,50 +1,105 @@
-# React + TypeScript + Vite
+# Mine Safety & Incident Tracker Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mining operations in the DRC (Democratic Republic of Congo) face frequent safety challenges. **MineSafety** provides a digital platform for workers and managers to quickly log incidents, monitor risks, and visualize safety data—helping make mines safer, more transparent, and more responsive.
 
-Currently, two official plugins are available:
+## 🚩 Problem Solved
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Mining sites in the DRC often lack a streamlined, user-friendly system for reporting and analyzing safety incidents. Workers and supervisors need a fast, accessible way to:
+- Log new incidents
+- Track safety trends
+- Identify high-risk zones
+- Make data-driven decisions to improve workplace safety
 
-## Expanding the ESLint configuration
+## 🛠️ Core Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Incident Submission Form:** Log incidents with details like location, type, severity, and date.
+- **Real-Time Dashboard:** Visualize incidents in real time using KendoReact’s Grid, Charts (bar, pie), DatePicker, and DropDownList.
+- **Heatmap Safety Reports:** Instantly see high-risk zones with a heatmap-style overview.
+- **Worker-Friendly Chatbot Assistant:** Use natural language commands such as:
+  - "Log a new incident"
+  - "Show me incidents by severity"
+- **Comprehensive UI Components:** Built with KendoReact, including Grid, Charts, Inputs, Dialog, DropDownList, DatePicker, TabStrip, Notification, Avatar, and more.
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Frontend:** React + TypeScript + Vite
+- **UI Library:** [KendoReact](https://www.telerik.com/kendo-react-ui/) (Grid, Charts, Inputs, etc.)
+- **Styling:** [TailwindCSS](https://tailwindcss.com/) for rapid, responsive UI design
+- **State & Data:** Modern React state management and hooks
+- **Chatbot:** Custom worker assistant for conversational incident management
+
+## 📁 Project Structure
+
+```
+MineSafety/
+├── .gitignore
+├── README.md
+├── index.html
+├── node_modules/
+├── package-lock.json
+├── package.json
+├── public/
+├── src/
+│   ├── App.tsx
+│   ├── Home.tsx
+│   ├── assets/
+│   ├── components/
+│   ├── data/
+│   ├── index.css
+│   ├── main.tsx
+│   ├── pages/
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **src/assets/**: Images and static media assets
+- **src/components/**: Reusable React components (UI elements, forms, dialogs, charts, etc.)
+- **src/data/**: Static or mock data used in the app
+- **src/pages/**: Page-level components/views
+- **src/App.tsx**: Main application component
+- **src/Home.tsx**: Home page/dashboard
+- **src/main.tsx**: Vite entry point
+- **src/index.css**: TailwindCSS and global styles
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 📸 Screenshots
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+*(Add annotated screenshots of your dashboard, incident form, heatmap, and chatbot here!)*
+
+## 🔧 Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+3. **Visit:** [http://localhost:5173](http://localhost:5173)
+
+## 📝 Usage
+
+- Log in as a worker or supervisor.
+- Use the chatbot or the incident form to submit new reports.
+- Explore incidents by date, severity, type, or location in the dashboard.
+- Review the heatmap to identify and address high-risk zones.
+
+## 📦 Available Scripts
+
+- `npm run dev` – Start Vite development server
+- `npm run build` – Build for production
+- `npm run lint` – Run ESLint checks
+
+## 👥 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+## 📄 License
+
+MIT
+
+---
+
+*Empowering safer mining through digital transparency and real-time data.*
