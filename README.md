@@ -1,3 +1,4 @@
+
 # Mine Safety & Incident Tracker Dashboard
 
 Mining operations in the DRC (Democratic Republic of Congo) face frequent safety challenges. **MineSafety** provides a digital platform for workers and managers to quickly log incidents, monitor risks, and visualize safety data—helping make mines safer, more transparent, and more responsive.
@@ -14,10 +15,17 @@ Mining sites in the DRC often lack a streamlined, user-friendly system for repor
 
 - **Incident Submission Form:** Log incidents with details like location, type, severity, and date.
 - **Real-Time Dashboard:** Visualize incidents in real time using KendoReact’s Grid, Charts (bar, pie), DatePicker, and DropDownList.
-- **Heatmap Safety Reports:** Instantly see high-risk zones with a heatmap-style overview.
+- **Persistent Data:** Incidents and settings are saved in localStorage for a seamless experience.
+- **Theme & Language Switcher:** Instantly switch between light/dark mode and multiple languages (i18n support).
+- **Responsive Navigation:** Modern Navbar, Sidebar, and hamburger menu for mobile/desktop.
 - **Worker-Friendly Chatbot Assistant:** Use natural language commands such as:
   - "Log a new incident"
   - "Show me incidents by severity"
+  - "Change theme to dark"
+  - "Show statistics for today"
+  - "Export incidents"
+  - "Filter by location: Main Shaft"
+- **Chatbot App Actions:** The assistant can trigger theme/language changes, open dialogs, filter, show stats, and more.
 - **Comprehensive UI Components:** Built with KendoReact, including Grid, Charts, Inputs, Dialog, DropDownList, DatePicker, TabStrip, Notification, Avatar, and more.
 
 ## 🚀 Tech Stack
@@ -32,36 +40,58 @@ Mining sites in the DRC often lack a streamlined, user-friendly system for repor
 
 ```
 MineSafety/
-├── .gitignore
-├── README.md
 ├── index.html
-├── node_modules/
-├── package-lock.json
 ├── package.json
-├── public/
-├── src/
-│   ├── App.tsx
-│   ├── Home.tsx
-│   ├── assets/
-│   ├── components/
-│   ├── data/
-│   ├── index.css
-│   ├── main.tsx
-│   ├── pages/
+├── README.md
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 ├── vite.config.ts
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── App.tsx
+│   ├── i18n.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── assets/
+│   │   ├── classroom.svg
+│   │   ├── design.svg
+│   │   ├── documentation.svg
+│   │   ├── hero-bg.jpg
+│   │   ├── license.svg
+│   │   ├── logo.svg
+│   │   ├── react.svg
+│   ├── components/
+│   │   ├── ChatPanel.tsx
+│   │   ├── Hero.tsx
+│   │   ├── IncidentForm.tsx
+│   │   ├── IncidentGrid.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── StatsCard.tsx
+│   ├── data/
+│   │   └── incidents.ts
+│   ├── pages/
+│   │   ├── Dashboard.tsx
+│   │   ├── Monitoring.tsx
+│   │   └── Settings.tsx
 ```
 
-- **src/assets/**: Images and static media assets
-- **src/components/**: Reusable React components (UI elements, forms, dialogs, charts, etc.)
-- **src/data/**: Static or mock data used in the app
-- **src/pages/**: Page-level components/views
-- **src/App.tsx**: Main application component
-- **src/Home.tsx**: Home page/dashboard
+- **src/assets/**: Images, SVGs, and static media assets
+- **src/components/**: Reusable React components:
+  - `Navbar.tsx`, `Sidebar.tsx`: Responsive navigation and layout
+  - `IncidentForm.tsx`: Incident submission form
+  - `IncidentGrid.tsx`: Data grid for incidents
+  - `StatsCard.tsx`: Dashboard statistics
+  - `ChatPanel.tsx`: Conversational assistant/chatbot (can trigger app actions, show stats, filter, etc.)
+  - `Hero.tsx`: Landing/hero section
+- **src/data/**: Incident data (mock or persistent)
+- **src/pages/**: Page-level components (e.g., `Dashboard.tsx`, `Monitoring.tsx`, `Settings.tsx`)
+- **src/App.tsx**: Main application component, handles layout, theme, language, and state
 - **src/main.tsx**: Vite entry point
 - **src/index.css**: TailwindCSS and global styles
+- **src/i18n.tsx**: Internationalization (i18n) context/provider
 
 ## 📸 Screenshots
 
