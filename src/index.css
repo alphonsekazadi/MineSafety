@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+/* Kendo theme import */
+@import "@progress/kendo-theme-default/dist/all.css";
+
+/* small helper */
+html, body, #root { height: 100%; }
+:root {
+  font-family: Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+a:-webkit-any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	.section-container.get-started {
+		background-color: #FAFAFA;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+    --kendo-color-app-surface: #141414;
+    --kendo-color-on-app-surface: #f5f5f5;
+    --kendo-color-subtle: #C2C2C2;
+    --kendo-color-surface: #242424;
+    --kendo-color-surface-alt: #333;
+    --kendo-color-border: rgba(255, 255, 255, 0.24);
+    --kendo-color-border-alt: rgba(255, 255, 255, 0.48);
+    --kendo-color-base-subtle: #333;
+    --kendo-color-base-subtle-hover: #424242;
+    --kendo-color-base-subtle-active: #4D4D4D;
+    --kendo-color-base: #3D3D3D;
+    --kendo-color-base-hover: #4D4D4D;
+    --kendo-color-base-active: #575757;
+    --kendo-color-base-emphasis: #9C9C9C;
+    --kendo-color-base-on-subtle: #f5f5f5;
+    --kendo-color-on-base: #f5f5f5;
+    --kendo-color-base-on-surface: #f5f5f5;
+    --kendo-color-primary-subtle: #752D29;
+    --kendo-color-primary-subtle-hover: #8C3631;
+    --kendo-color-primary-subtle-active: #A43F39;
+    --kendo-color-primary: #EA5A51;
+    --kendo-color-primary-hover: #D35149;
+    --kendo-color-primary-active: #BB4841;
+    --kendo-color-primary-emphasis: #F29C97;
+    --kendo-color-primary-on-subtle: #FDEFEE;
+    --kendo-color-on-primary: #fff;
+    --kendo-color-primary-on-surface: #ED736B;
+    --kendo-color-secondary-subtle: #333;
+    --kendo-color-secondary-subtle-hover: #424242;
+    --kendo-color-secondary-subtle-active: #4D4D4D;
+    --kendo-color-secondary: #C2C2C2;
+    --kendo-color-secondary-hover: #D6D6D6;
+    --kendo-color-secondary-active: #EBEBEB;
+    --kendo-color-secondary-emphasis: #9C9C9C;
+    --kendo-color-secondary-on-subtle: #f5f5f5;
+    --kendo-color-on-secondary: #141414;
+    --kendo-color-secondary-on-surface: #C2C2C2;
+    --kendo-color-tertiary-subtle: #023F5C;
+    --kendo-color-tertiary-subtle-hover: #02557A;
+    --kendo-color-tertiary-subtle-active: #026999;
+    --kendo-color-tertiary: #03A9F4;
+    --kendo-color-tertiary-hover: #039AE0;
+    --kendo-color-tertiary-active: #028CCB;
+    --kendo-color-tertiary-emphasis: #61C9F9;
+    --kendo-color-tertiary-on-subtle: #EBF8FE;
+    --kendo-color-on-tertiary: #fff;
+    --kendo-color-tertiary-on-surface: #03A9F4;
+    --kendo-color-info-subtle: #002C75;
+    --kendo-color-info-subtle-hover: #003892;
+    --kendo-color-info-subtle-active: #0042AF;
+    --kendo-color-info: #0058E9;
+    --kendo-color-info-hover: #0052D6;
+    --kendo-color-info-active: #0044C2;
+    --kendo-color-info-emphasis: #0052D6;
+    --kendo-color-info-on-subtle: #E9F0FD;
+    --kendo-color-on-info: #fff;
+    --kendo-color-info-on-surface: #4082EF;
+    --kendo-color-success-subtle: #1C5A00;
+    --kendo-color-success-subtle-hover: #227100;
+    --kendo-color-success-subtle-active: #298700;
+    --kendo-color-success: #37B400;
+    --kendo-color-success-hover: #32A500;
+    --kendo-color-success-active: #2D9600;
+    --kendo-color-success-emphasis: #32A500;
+    --kendo-color-success-on-subtle: #EDF8E9;
+    --kendo-color-on-success: #fff;
+    --kendo-color-success-on-surface: #32A500;
+    --kendo-color-warning-subtle: #806000;
+    --kendo-color-warning-subtle-hover: #A07800;
+    --kendo-color-warning-subtle-active: #BF9000;
+    --kendo-color-warning: #FFC000;
+    --kendo-color-warning-hover: #EAAF00;
+    --kendo-color-warning-active: #D49F00;
+    --kendo-color-warning-emphasis: #FFC720;
+    --kendo-color-warning-on-subtle: #FFFAE9;
+    --kendo-color-on-warning: #3D3D3D;
+    --kendo-color-warning-on-surface: #EAAF00;
+    --kendo-color-error-subtle: #980F00;
+    --kendo-color-error-subtle-hover: #B61100;
+    --kendo-color-error-subtle-active: #CA1400;
+    --kendo-color-error: #F43520;
+    --kendo-color-error-hover: #F31700;
+    --kendo-color-error-active: #DF1600;
+    --kendo-color-error-emphasis: #F43520;
+    --kendo-color-error-on-subtle: #FEEEED;
+    --kendo-color-on-error: #fff;
+    --kendo-color-error-on-surface: #F65140;
+    --kendo-color-light-subtle: #FAFAFA;
+    --kendo-color-light-subtle-hover: #f5f5f5;
+    --kendo-color-light-subtle-active: #EBEBEB;
+    --kendo-color-light: #EBEBEB;
+    --kendo-color-light-hover: #E0E0E0;
+    --kendo-color-light-active: #D6D6D6;
+    --kendo-color-light-emphasis: #D6D6D6;
+    --kendo-color-light-on-subtle: #141414;
+    --kendo-color-on-light: #000;
+    --kendo-color-light-on-surface: #E0E0E0;
+    --kendo-color-dark-subtle: #C2C2C2;
+    --kendo-color-dark-subtle-hover: #ADADAD;
+    --kendo-color-dark-subtle-active: #999;
+    --kendo-color-dark: #3D3D3D;
+    --kendo-color-dark-hover: #292929;
+    --kendo-color-dark-active: #1F1F1F;
+    --kendo-color-dark-emphasis: #666;
+    --kendo-color-dark-on-subtle: #1F1F1F;
+    --kendo-color-on-dark: #fff;
+    --kendo-color-dark-on-surface: #141414;
+    --kendo-color-inverse-subtle: #FAFAFA;
+    --kendo-color-inverse-subtle-hover: #f5f5f5;
+    --kendo-color-inverse-subtle-active: #EBEBEB;
+    --kendo-color-inverse: #EBEBEB;
+    --kendo-color-inverse-hover: #E0E0E0;
+    --kendo-color-inverse-active: #D6D6D6;
+    --kendo-color-inverse-emphasis: #D6D6D6;
+    --kendo-color-inverse-on-subtle: #141414;
+    --kendo-color-on-inverse: #000;
+    --kendo-color-inverse-on-surface: #E0E0E0;
+    --kendo-color-series-a: #EA5A51;
+    --kendo-color-series-a-bold: #F08C85;
+    --kendo-color-series-a-bolder: #F5ADA8;
+    --kendo-color-series-a-subtle: #BB4841;
+    --kendo-color-series-a-subtler: #8C3631;
+    --kendo-color-series-b: #FFE162;
+    --kendo-color-series-b-bold: #FFED9D;
+    --kendo-color-series-b-bolder: #FFF7D4;
+    --kendo-color-series-b-subtle: #D4BC52;
+    --kendo-color-series-b-subtler: #A3913F;
+    --kendo-color-series-c: #4CD180;
+    --kendo-color-series-c-bold: #79DDA0;
+    --kendo-color-series-c-bolder: #A6E8C0;
+    --kendo-color-series-c-subtle: #3FAE6A;
+    --kendo-color-series-c-subtler: #2F834F;
+    --kendo-color-series-d: #4B5FFA;
+    --kendo-color-series-d-bold: #7887FB;
+    --kendo-color-series-d-bolder: #A5AFFD;
+    --kendo-color-series-d-subtle: #3F50D1;
+    --kendo-color-series-d-subtler: #2F3C9D;
+    --kendo-color-series-e: #AC58FF;
+    --kendo-color-series-e-bold: #C182FF;
+    --kendo-color-series-e-bolder: #D6ACFF;
+    --kendo-color-series-e-subtle: #8F49D4;
+    --kendo-color-series-e-subtler: #6B37A0;
+    --kendo-color-series-f: #EA5186;
+    --kendo-color-series-f-bold: #FF82AE;
+    --kendo-color-series-f-bolder: #FFACC9;
+    --kendo-color-series-f-subtle: #BF426E;
+    --kendo-color-series-f-subtler: #802C49;
+	}
+
+	.k-appbar {
+		color: #ffffff;
+		background-color: #3d3d3d;
+	}
+	.section-container.get-started {
+		background-color: #3d3d3d;
+	}
+
+	.k-card {
+		color: #ffffff;
+		background-color: #3d3d3d;
+	}
+}

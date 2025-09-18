@@ -1,0 +1,22 @@
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/filter/_theme.scss" as *;
+
+@mixin kendo-filter--theme() {
+    @include kendo-filter--theme-base();
+
+    .k-filter {
+        color: $kendo-filter-text;
+
+        .k-filter-item::before,
+        .k-filter-toolbar::before,
+        .k-filter-lines .k-filter-item:last-child > .k-filter-toolbar::after,
+        .k-filter-lines .k-filter-item:last-child > * > .k-filter-toolbar::after {
+            background-color: $kendo-filter-line-bg;
+        }
+
+        .k-toolbar:focus,
+        .k-toolbar.k-focus {
+            border-color: $kendo-filter-toolbar-focus-border;
+        }
+    }
+}

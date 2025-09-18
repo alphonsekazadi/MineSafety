@@ -1,0 +1,87 @@
+{
+  "name": "@progress/kendo-file-saver",
+  "description": "Kendo UI File Saving Helper",
+  "author": "Progress",
+  "license": "Apache-2.0",
+  "version": "1.1.2",
+  "main": "dist/npm/main.js",
+  "module": "dist/es/main.js",
+  "jsnext:main": "dist/es/main.js",
+  "es2015": "dist/es2015/main.js",
+  "typings": "dist/npm/main.d.ts",
+  "jsdelivr": "dist/cdn/main.js",
+  "unpkg": "dist/cdn/main.js",
+  "scripts": {
+    "build-cdn": "gulp build-cdn",
+    "build-package": "gulp build-module && gulp build-cdn",
+    "test": "gulp test",
+    "lint": "gulp lint",
+    "semantic-release": "semantic-release pre && semantic-prerelease publish && semantic-release post"
+  },
+  "keywords": [
+    "Kendo UI",
+    "Save",
+    "SaveAs",
+    "Saving",
+    "File Saver"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@telerik/eslint-config": "^1.0.0",
+    "@progress/kendo-package-tasks": "^4.0.34",
+    "@telerik/semantic-prerelease": "^1.0.0",
+    "@types/jasmine": "2.5.38",
+    "cz-conventional-changelog": "^1.1.5",
+    "ghooks": "^1.0.3",
+    "gulp": "^4.0.0",
+    "semantic-release": "^6.3.6",
+    "validate-commit-msg": "^1.1.1"
+  },
+  "@progress": {
+    "friendlyName": "FileSaver"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/telerik/kendo-file-saver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/telerik/kendo-angular"
+  },
+  "release": {
+    "debug": false,
+    "branchTags": {
+      "develop": "dev"
+    },
+    "fallbackTags": {
+      "dev": "latest"
+    },
+    "analyzeCommits": "@telerik/semantic-prerelease/analyzeCommits",
+    "generateNotes": "@telerik/semantic-prerelease/generateNotes",
+    "getLastRelease": "@telerik/semantic-prerelease/getLastRelease",
+    "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
+    "verifyRelease": "@telerik/semantic-prerelease/verifyRelease"
+  }
+}

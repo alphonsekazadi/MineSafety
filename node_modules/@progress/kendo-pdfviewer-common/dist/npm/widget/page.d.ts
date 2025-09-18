@@ -1,0 +1,75 @@
+import { PDFPageProxy } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { TextAccessibilityManager } from "../annotations/helpers/text-accessibility-manager";
+import { Component } from "../common/component";
+import { TextLayerBuilder } from "../text/text-layer-builder";
+import { AnnotationLayerBuilder } from "../annotations/annotation-layer-builder";
+import { DrawLayerBuilder } from "../annotations/draw-layer-builder";
+import { AnnotationEditorLayerBuilder } from "../annotations/annotation-editor-layer-builder";
+import { PdfViewer } from "./pdfviewer";
+import { EventBus } from "../annotations/shared/event_utils";
+export declare class Page extends Component {
+    #private;
+    eventBus: EventBus;
+    zoomLayer: any;
+    div: any;
+    viewport: any;
+    id: any;
+    _accessibilityManager: TextAccessibilityManager;
+    _annotationCanvasMap: any;
+    renderTask: any;
+    pdfPageRotate: any;
+    rotation: any;
+    scale: number;
+    pdfViewer: PdfViewer;
+    xfaLayer: any;
+    element: HTMLDivElement;
+    canvas: any;
+    canvasForPrint: any;
+    textLayer: TextLayerBuilder;
+    textLayerBuilder: TextLayerBuilder;
+    textAccessibilityManager: TextAccessibilityManager;
+    annotationLayer: AnnotationLayerBuilder;
+    drawLayer: DrawLayerBuilder;
+    annotationEditorLayer: AnnotationEditorLayerBuilder;
+    options: any;
+    state: any;
+    pdfPage: PDFPageProxy;
+    constructor(element: any, options: any);
+    destroy(): void;
+    get isEditing(): boolean;
+    get rawWidth(): any;
+    get rawHeight(): any;
+    setState(newState: any): void;
+    resetState(): void;
+    initScale(): void;
+    createPromise(): Promise<any>;
+    getViewport(options?: {
+        scale: number;
+    }): import("pdfjs-dist/types/src/display/display_utils").PageViewport | {
+        width: number;
+        height: number;
+    };
+    destroyTextLayer(): void;
+    removeTextLayer(): void;
+    getPrintContentAsync(): Promise<any>;
+    loadForPrintAsync({ zoomLevel, force }: {
+        zoomLevel?: number;
+        force?: boolean;
+    }): any;
+    renderForPrintAsync(): Promise<void>;
+    isBlank(): string;
+    setBlank(isBlank: any): void;
+    get renderingState(): number;
+    setPdfPage(pdfPage: any): void;
+    hasEditableAnnotations(): boolean;
+    _resetZoomLayer(removeFromDOM?: boolean): void;
+    reset({ keepZoomLayer, keepAnnotationLayer, keepAnnotationEditorLayer, keepXfaLayer, keepTextLayer }?: {
+        keepZoomLayer?: boolean;
+        keepAnnotationLayer?: boolean;
+        keepAnnotationEditorLayer?: boolean;
+        keepXfaLayer?: boolean;
+        keepTextLayer?: boolean;
+    }): void;
+    toggleEditingMode(isEditing: any): void;
+    draw(): Promise<void>;
+}

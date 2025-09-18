@@ -1,0 +1,19 @@
+@use "../core/_index.scss" as *;
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/mediaplayer/_theme.scss" as *;
+
+@mixin kendo-media-player--theme() {
+    @include kendo-media-player--theme-base();
+
+    .k-mediaplayer-overlay {
+        background-color: $kendo-media-player-overlay-bg;
+    }
+
+    .k-mediaplayer-titlebar {
+        background-color: $kendo-media-player-titlebar-bg;
+    }
+
+    .k-mediaplayer-quality {
+        border-color: $kendo-media-player-quality-border;
+    }
+}

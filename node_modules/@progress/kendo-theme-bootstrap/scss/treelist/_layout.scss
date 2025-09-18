@@ -1,0 +1,21 @@
+@use "@progress/kendo-theme-core/scss/components/treelist/_layout.scss" as *;
+
+
+@mixin kendo-treelist--layout() {
+
+    @include kendo-treelist--layout-base();
+
+    .k-treelist {
+        tr.k-footer td,
+        tr.k-footer-template td {
+            font-weight: normal;
+        }
+    }
+
+    .k-treelist-scrollable {
+        .k-group-footer td {
+            font-weight: normal;
+        }
+    }
+
+}

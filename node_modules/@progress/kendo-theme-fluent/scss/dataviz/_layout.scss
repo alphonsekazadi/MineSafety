@@ -1,0 +1,21 @@
+@use "sass:meta";
+@use "sass:string";
+@use "../core/_index.scss" as *;
+@use "./_variables.scss" as *;
+@use "../tooltip/_variables.scss" as *;
+@use "../core/spacing/_index.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/dataviz/_layout.scss" as *;
+
+@mixin kendo-dataviz--layout() {
+    @include kendo-dataviz--layout-base();
+
+    .k-chart-tooltip,
+    .k-chart-tooltip td {
+        line-height: $kendo-chart-tooltip-line-height;
+    }
+
+    .k-treemap-title-vertical {
+        padding: $kendo-treemap-padding-x;
+    }
+
+}

@@ -1,0 +1,13 @@
+// Disabled
+
+@mixin disabled( $color: null, $bg: null, $border: null, $opacity: null, $filter: null ) {
+    outline: none;
+    cursor: default;
+    color: $color;
+    background-color: $bg;
+    border-color: $border;
+    opacity: $opacity;
+    filter: $filter;
+    pointer-events: none;
+    box-shadow: none;
+}

@@ -1,0 +1,187 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.convertMsLists = void 0;
+const source_1 = require("./source");
+const msoListRegExp = /style=['"]?[^'"]*?mso-list:\s*[a-zA-Z]+(\d+)\s[a-zA-Z]+(\d+)\s(\w+)/gi;
+const extractListLevels = (html) => {
+    html = html.replace(msoListRegExp, (match, list, level) => {
+        return `datalist="${list}" datalevel="${level}" ${match}`;
+    });
+    return html;
+};
+const isPartOfListItem = (element) => {
+    return /^MsoListParagraph/.test(element.className);
+};
+const innerText = (node) => {
+    return node.textContent;
+};
+const createList = (type, styleType) => {
+    const list = document.createElement(type);
+    list.style.listStyleType = styleType;
+    return list;
+};
+const guessUnorderedListStyle = (symbol) => {
+    if (/^[\u2022\u00b7\u00FC\u00D8\u002dv-]/.test(symbol)) {
+        return null; // return "disc"; //default CSS value
+    }
+    else if (/^o/.test(symbol)) {
+        return 'circle';
+    }
+    else {
+        return 'square';
+    }
+};
+const guessOrderedListStyle = (symbol) => {
+    let type = null;
+    if (!/^\d/.test(symbol)) {
+        type = (/^[a-z]/.test(symbol) ? 'lower-' : 'upper-') +
+            (/^[ivxlcdm]/i.test(symbol) ? 'roman' : 'alpha');
+    }
+    return type;
+};
+const mapListsCandidates = (nodes, groups) => {
+    let group = [];
+    Array.from(nodes).forEach(node => {
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            return;
+        }
+        const element = node;
+        if (element.getAttribute('datalist')) {
+            group.push(node);
+            groups.add(group);
+        }
+        else if (isPartOfListItem(element) && group.length) {
+            group.push(node);
+        }
+        else {
+            group = [];
+            if (element.nodeName === 'DIV') {
+                mapListsCandidates(element.children, groups);
+            }
+            else if (element.nodeName === 'TABLE') {
+                Array.from(element.querySelectorAll('td,th')).forEach(cell => {
+                    mapListsCandidates(cell.children, groups);
+                });
+            }
+        }
+    });
+};
+const listTypes = (p) => {
+    const html = p.textContent;
+    const trimStartText = (t) => {
+        return t.replace(/^(?:&nbsp;|[\u00a0\n\r\s])+/, '');
+    };
+    if ((/^[\u2022\u00b7\u00a7\u00d8oØüvn][\u00a0 ]+/.test(html))) {
+        return {
+            tag: 'ul',
+            style: guessUnorderedListStyle(trimStartText(innerText(p)))
+        };
+    }
+    if (/^\s*\w+[.)][\u00a0 ]{2,}/.test(html)) {
+        return {
+            tag: 'ol',
+            style: guessOrderedListStyle(trimStartText(innerText(p)))
+        };
+    }
+};
+const convertToLi = (p) => {
+    const name = p.nodeName.toLowerCase();
+    let content;
+    if (p.firstChild && p.firstChild.nodeType === Node.COMMENT_NODE) {
+        p.removeChild(p.firstChild);
+    }
+    if (p.childNodes.length === 1) {
+        content = p.firstChild.nodeType === Node.TEXT_NODE ?
+            innerText(p) : p.firstChild.innerHTML.replace(/^\w+[.)](&nbsp;)+ /, '');
+    }
+    else {
+        p.removeChild(p.firstChild);
+        // check for Roman numerals
+        if (p.firstChild.nodeType === 3) {
+            if (/^[ivxlcdm]+\.$/i.test(p.firstChild.nodeValue)) {
+                p.removeChild(p.firstChild);
+            }
+        }
+        if (/^(&nbsp;|\s)+$/i.test(p.firstChild.innerHTML)) {
+            p.removeChild(p.firstChild);
+        }
+        if (name !== 'p') {
+            content = '<' + name + '>' + p.innerHTML + '</' + name + '>';
+        }
+        else {
+            content = p.innerHTML;
+        }
+    }
+    p.parentNode.removeChild(p);
+    const li = document.createElement('li');
+    li.appendChild((0, source_1.htmlToFragment)(content));
+    return li;
+};
+const toList = (blockNodes) => {
+    const levels = {};
+    let lastMargin = -1, li, rootMargin, rootIndex, lastRootLi, isLastRootLi, rootList, items, i, p, type, margin, list, listData;
+    for (i = 0; i < blockNodes.length; i++) {
+        p = blockNodes[i];
+        listData = {
+            datalist: p.getAttribute('datalist'),
+            datalevel: p.getAttribute('datalevel')
+        };
+        const listIndex = listData.datalist;
+        const listType = listTypes(p);
+        type = listType && listType.tag;
+        if (!type) {
+            if (li && (!isLastRootLi || isPartOfListItem(p))) {
+                if (p.style.marginLeft) {
+                    p.style.marginLeft = '';
+                }
+                if (p.style.marginLeft) {
+                    // tests runner/framework fails to delete marginLeft
+                    p.style.margin = '';
+                }
+                li.appendChild(p);
+            }
+            continue;
+        }
+        margin = listData.datalevel || parseFloat(p.style.marginLeft || 0);
+        if (!listData.datalevel && !p.style.marginLeft) {
+            continue;
+        }
+        const levelType = type + listIndex;
+        if (!levels[margin]) {
+            levels[margin] = {};
+        }
+        if (!rootMargin || rootMargin < 0) {
+            rootMargin = margin;
+            rootIndex = listIndex;
+            items = blockNodes.filter(e => e.getAttribute('datalist') === String(rootIndex));
+            lastRootLi = items[items.length - 1];
+            rootList = createList(type, listType && listType.style);
+            p.parentNode.insertBefore(rootList, p);
+            lastMargin = margin;
+            levels[margin][levelType] = rootList;
+        }
+        isLastRootLi = lastRootLi === p;
+        list = levels[margin][levelType];
+        if (margin > lastMargin || !list) {
+            list = createList(type, listType && listType.style);
+            levels[margin][levelType] = list;
+            li.appendChild(list);
+        }
+        li = convertToLi(p);
+        list.appendChild(li);
+        if (isLastRootLi) {
+            rootMargin = lastMargin = -1;
+        }
+        else {
+            lastMargin = margin;
+        }
+    }
+};
+const convertMsLists = (html) => {
+    const container = (0, source_1.htmlToFragment)(extractListLevels(html));
+    const groups = new Set();
+    mapListsCandidates(container.children, groups);
+    groups.forEach(listsCandidates => toList(listsCandidates));
+    return (0, source_1.fragmentToHtml)(container);
+};
+exports.convertMsLists = convertMsLists;

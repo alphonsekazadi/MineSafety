@@ -1,0 +1,57 @@
+@use "../core/_index.scss" as *;
+@use '_variables.scss' as *;
+@use "@progress/kendo-theme-core/scss/components/menu/_theme.scss" as *;
+
+@mixin kendo-menu--theme() {
+    @include kendo-menu--theme-base();
+
+    .k-menu:not(.k-context-menu) {
+        box-shadow: $kendo-menu-shadow;
+
+        > .k-item {
+
+            &:focus,
+            &.k-focus {
+                color: $kendo-menu-item-focus-text;
+                background-color: $kendo-menu-item-focus-bg;
+                outline-color: $kendo-menu-item-focus-outline;
+            }
+
+            &.k-disabled {
+                color: $kendo-menu-item-disabled-text;
+                background-color: $kendo-menu-item-disabled-bg;
+            }
+        }
+
+        .k-link > .k-icon {
+            color: $kendo-menu-icon-color;
+        }
+    }
+
+    .k-menu-popup {
+        box-shadow: $kendo-menu-popup-shadow;
+    }
+
+    .k-menu-group,
+    .k-menu.k-context-menu {
+        .k-item {
+
+            & > .k-link {
+
+                &.k-disabled {
+                    color: $kendo-menu-popup-item-disabled-text;
+                    background-color: $kendo-menu-popup-item-disabled-bg;
+                }
+            }
+            &:focus,
+            &:focus-visible,
+            &.k-focus {
+                outline-color: transparent;
+
+                > .k-link {
+                    outline-color: $kendo-menu-popup-item-focus-outline;
+                }
+            }
+        }
+    }
+}

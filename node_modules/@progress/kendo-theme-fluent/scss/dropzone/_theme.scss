@@ -1,0 +1,7 @@
+@use "../core/_index.scss" as *;
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/dropzone/_theme.scss" as *;
+
+@mixin kendo-dropzone--theme() {
+    @include kendo-dropzone--theme-base();
+}

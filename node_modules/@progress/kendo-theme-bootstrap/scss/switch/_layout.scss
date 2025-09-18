@@ -1,0 +1,13 @@
+@use "@progress/kendo-theme-core/scss/components/switch/_layout.scss" as *;
+
+@mixin kendo-switch--layout() {
+
+    @include kendo-switch--layout-base();
+
+    // Switch
+    .k-switch.k-disabled {
+        opacity: 1;
+        filter: none;
+    }
+
+}

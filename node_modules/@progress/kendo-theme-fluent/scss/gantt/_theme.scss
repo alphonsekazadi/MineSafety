@@ -1,0 +1,80 @@
+@use "../core/_index.scss" as *;
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/gantt/_theme.scss" as *;
+
+@mixin kendo-gantt--theme() {
+    @include kendo-gantt--theme-base();
+
+    .k-gantt-treelist {
+        @include fill(
+            $kendo-gantt-treelist-text,
+            $kendo-gantt-treelist-bg,
+            $kendo-gantt-treelist-border
+        );
+    }
+
+    .k-task-single {
+        &:hover {
+            .k-task-complete {
+                background-color: $kendo-gantt-task-progress-hover-bg;
+            }
+        }
+    }
+
+    .k-task-delayed {
+        &:hover .k-task-complete {
+            @include fill(
+                $bg: $kendo-gantt-delayed-hover-bg
+            );
+        }
+    }
+
+    .k-task-advanced {
+        &:hover {
+            .k-task-complete {
+                background-color: $kendo-gantt-advanced-hover-bg;
+            }
+        }
+    }
+
+    .k-gantt-line {
+        @include fill (
+            $color: $kendo-gantt-line-fill
+        );
+    }
+    .k-gantt-line.k-selected {
+        @include fill(
+            $color: $kendo-gantt-line-selected-fill
+        );
+    }
+
+    .k-offset-tooltip-delayed {
+        @include fill(
+            $color: $kendo-gantt-delayed-text,
+            $bg: $kendo-gantt-delayed-bg
+        );
+    }
+
+    .k-planned-tooltip {
+        @include fill(
+            $color: $kendo-gantt-planned-text,
+            $bg: $kendo-gantt-planned-bg
+        );
+    }
+
+    .k-gantt-tooltip-validation::before {
+        @include fill(
+            $bg: $kendo-gantt-validation-tooltip-border
+        );
+    }
+    .k-gantt-tooltip-valid::before {
+        @include fill(
+            $bg: $kendo-gantt-validation-tooltip-valid-border
+        );
+    }
+    .k-gantt-tooltip-invalid::before {
+        @include fill(
+            $bg: $kendo-gantt-validation-tooltip-invalid-border
+        );
+    }
+}

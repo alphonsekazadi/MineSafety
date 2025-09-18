@@ -1,0 +1,16 @@
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/listbox/_layout.scss" as *;
+
+
+@mixin kendo-listbox--layout() {
+
+    @include kendo-listbox--layout-base();
+
+    .k-listbox {
+        .k-item {
+            padding-block: $kendo-listbox-item-padding-y;
+            padding-inline: $kendo-listbox-item-padding-x;
+        }
+    }
+
+}

@@ -1,0 +1,2 @@
+export { default as IntlService } from './services/intl-service';
+export { default as TemplateService } from './services/template-service';

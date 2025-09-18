@@ -1,0 +1,27 @@
+@use "@progress/kendo-theme-core/scss/components/spreadsheet/_layout.scss" as *;
+@use "../core/_index.scss" as *;
+
+@mixin kendo-spreadsheet--layout() {
+
+    @include kendo-spreadsheet--layout-base();
+
+    .k-spreadsheet-menu {
+        padding-inline: k-spacing(2);
+    }
+
+    // Filter menu - Delete once new rendering is adopted R3 23
+    .k-spreadsheet-filter-menu {
+        > .k-menu,
+        > .k-menu:not(.k-context-menu) {
+            background: none;
+            color: inherit;
+            font-weight: inherit;
+            font-size: inherit;
+        }
+    }
+
+    .k-spreadsheet-filter {
+        padding: k-spacing(1);
+    }
+
+}

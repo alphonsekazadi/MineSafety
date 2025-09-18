@@ -1,0 +1,15 @@
+// Options
+$kendo-is-dark-theme: false !default;
+$kendo-enable-shadows: true !default;
+$kendo-enable-rounded: true !default;
+$kendo-enable-gradients: true !default;
+$kendo-enable-transitions: true !default;
+$kendo-nested-disabled: true !default;
+$kendo-enable-focus-contrast: false !default;
+$wcag-min-contrast-ratio: 4.5 !default;
+$kendo-enable-typography: false !default;
+// Equilateral triangle variables
+// stylelint-disable number-max-precision
+$equilateral-index: 1.7320508076 !default;
+$equilateral-height: 0.8660254038 !default;
+// stylelint-enable number-max-precision

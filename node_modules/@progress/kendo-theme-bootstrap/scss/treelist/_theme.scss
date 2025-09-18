@@ -1,0 +1,26 @@
+@use "./_variables.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/treelist/_theme.scss" as *;
+
+
+@mixin kendo-treelist--theme() {
+
+    @include kendo-treelist--theme-base();
+
+    .k-treelist {
+        tr.k-footer,
+        tr.k-footer-template {
+            &:hover {
+                background-color: $kendo-treelist-footer-row-bg;
+            }
+        }
+    }
+
+    .k-treelist-scrollable {
+        .k-group-footer td,
+        .k-grouping-row td,
+        tbody .k-group-cell {
+            background-color: $kendo-treelist-footer-row-bg;
+        }
+    }
+
+}

@@ -1,0 +1,26 @@
+@use "@progress/kendo-theme-core/scss/components/breadcrumb/_layout.scss" as *;
+
+@mixin kendo-breadcrumb--layout() {
+
+    @include kendo-breadcrumb--layout-base();
+
+    // Breadcrumb links
+    .k-breadcrumb-link,
+    .k-breadcrumb-root-link {
+        text-decoration: underline;
+
+        &:hover,
+        &.k-hover {
+            text-decoration: null;
+        }
+    }
+
+    // Breadcrumb current (last) item
+    .k-breadcrumb-current-item {
+        .k-disabled {
+            opacity: 1;
+            filter: none;
+        }
+    }
+
+}

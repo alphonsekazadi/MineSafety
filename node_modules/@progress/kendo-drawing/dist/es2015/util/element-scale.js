@@ -1,0 +1,40 @@
+import Matrix from '../geometry/matrix';
+
+const matrixRegexp = /matrix\((.*)\)/;
+
+function parseMatrix(matrixString) {
+    const match = matrixString.match(matrixRegexp);
+    if (match === null || match.length !== 2) {
+        return Matrix.unit();
+    }
+
+    const members = match[1].split(',').map(x => parseFloat(x));
+    return new Matrix(...members);
+}
+
+function transformMatrix(element) {
+    const transform = getComputedStyle(element).transform;
+
+    if (transform === 'none') {
+        return Matrix.unit();
+    }
+
+    return parseMatrix(transform);
+}
+
+export default function elementScale(element) {
+    if (!element) {
+        return Matrix.unit();
+    }
+
+    let matrix = transformMatrix(element);
+    let parent = element.parentElement;
+    while (parent) {
+        const parentMatrix = transformMatrix(parent);
+        matrix = matrix.multiplyCopy(parentMatrix);
+        parent = parent.parentElement;
+    }
+
+    matrix.b = matrix.c = matrix.e = matrix.f = 0;
+    return matrix;
+}

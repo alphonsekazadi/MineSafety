@@ -1,0 +1,20 @@
+@use "../core/_index.scss" as *;
+@use "@progress/kendo-theme-core/scss/components/floating-label/_theme.scss" as *;
+
+
+@mixin kendo-floating-label--theme() {
+
+    @include kendo-floating-label--theme-base();
+
+    // Floating label
+    .k-floating-label-container {
+
+        &.k-invalid + .k-floating-label,
+        .k-invalid + .k-floating-label,
+        .ng-invalid.ng-touched + .k-floating-label,
+        .ng-invalid.ng-dirty + .k-floating-label {
+            @include fill( $color: k-color(error) );
+        }
+    }
+
+}
