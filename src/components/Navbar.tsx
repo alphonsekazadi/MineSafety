@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAddIncident, onExport }) => {
 
         <div className="flex items-center gap-2">
           <Button themeColor={"primary"} aria-label="Add Incident" onClick={onAddIncident}>Add Incident</Button>
-          <Button themeColor={"secondary"} onClick={onExport}>Export</Button>
+          <Button themeColor={"secondary"} fillMode={"outline"} onClick={onExport}>Export</Button>
           <Button themeColor={"success"}>Help</Button>
         </div>
       </div>
