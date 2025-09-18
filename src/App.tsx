@@ -5,8 +5,6 @@ import Dashboard from "./pages/Dashboard";
 import ChatPanel from "./components/ChatPanel";
 import React, { useState } from "react";
 
-// ...existing code...
-
 function App() {
   const [incidentDialogOpen, setIncidentDialogOpen] = useState(false);
   const [downloadDialogOpen, setDownloadDialogOpen] = useState(false);
