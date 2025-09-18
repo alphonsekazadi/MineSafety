@@ -5,7 +5,7 @@ import StatsCard from "../components/StatsCard";
 import IncidentGrid from "../components/IncidentGrid";
 import { Dialog, DialogActionsBar } from "@progress/kendo-react-dialogs";
 import { Notification, NotificationGroup } from "@progress/kendo-react-notification";
-import { Chart, ChartSeries, ChartSeriesItem, ChartTitle, ChartLegend, ChartCategoryAxis, ChartCategoryAxisItem } from "@progress/kendo-react-charts";
+import { Chart, ChartSeries, ChartSeriesItem, ChartLegend, ChartCategoryAxis, ChartCategoryAxisItem } from "@progress/kendo-react-charts";
 import { incidents } from "../data/incidents";
 import { Button } from "@progress/kendo-react-buttons";
 
@@ -47,11 +47,11 @@ const Dashboard: React.FC<DashboardProps> = ({
   });
 
   // Top Locations
-  const locationMap = {};
+  const locationMap: Record<string, number> = {};
   incidents.forEach(i => {
     locationMap[i.location] = (locationMap[i.location] || 0) + 1;
   });
-  const topLocations = Object.entries(locationMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const topLocations = (Object.entries(locationMap) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
   // Notification state
   const [notification, setNotification] = useState<{type: string, text: string} | null>(null);
@@ -140,7 +140,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             <div className="text-sm text-gray-500 mb-2">Top Locations</div>
             <ul className="text-xs text-gray-700 space-y-1">
               {topLocations.map(([loc, count]) => (
-                <li key={loc} className="flex justify-between"><span>{loc}</span><span className="font-bold">{count}</span></li>
+                <li key={loc} className="flex justify-between"><span>{String(loc)}</span><span className="font-bold">{String(count)}</span></li>
               ))}
             </ul>
           </div>
@@ -180,7 +180,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       {/* Notification */}
       <NotificationGroup style={{ right: 24, bottom: 24, position: 'fixed', zIndex: 1000 }}>
         {notification && (
-          <Notification type={{ style: notification.type, icon: true }} closable onClose={handleNotificationClose}>
+          <Notification type={notification.type as any} closable onClose={handleNotificationClose}>
             {notification.text}
           </Notification>
         )}
