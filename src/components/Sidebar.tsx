@@ -1,6 +1,7 @@
 // src/components/Sidebar.tsx
 import React from "react";
 import { Button } from "@progress/kendo-react-buttons";
+import { Switch } from "@progress/kendo-react-inputs";
 //import { Map } from "@progress/kendo-svg-icons";
 
 const Sidebar: React.FC = () => {
@@ -13,26 +14,33 @@ const Sidebar: React.FC = () => {
         <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
           MS
         </div>
-        <div>
-          <h1 className="text-lg font-semibold leading-tight">MineSafe</h1>
-          <p className="text-sm opacity-90">Incident Tracker</p>
+        <div className="flex items-center ml-auto">
+          <span className="mr-2 text-sm">Dark Mode</span>
+          <Switch
+            checked={document.documentElement.classList.contains('dark')}
+            onChange={() => {
+              const isDark = document.documentElement.classList.toggle('dark');
+              localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }}
+            aria-label="Toggle dark mode"
+          />
         </div>
       </div>
 
       <nav className="flex-1">
         <ul className="space-y-2">
           <li>
-            <Button fillMode="flat" className="w-full justify-start" aria-label="Dashboard button">
+            <Button fillMode="solid" themeColor={"primary"} className="w-full justify-start" aria-label="Dashboard button">
               Dashboard
             </Button>
           </li>
           <li>
-            <Button fillMode="flat" className="w-full justify-start" aria-label="Incidents button">
+            <Button fillMode="solid" themeColor={"primary"} className="w-full justify-start" aria-label="Incidents button">
               Incidents
             </Button>
           </li>
           <li>
-            <Button fillMode="flat" className="w-full justify-start" aria-label="Maintenance button">
+            <Button fillMode="solid" themeColor={"primary"} className="bg-blue-300 w-full justify-start" aria-label="Maintenance button">
               Maintenance
             </Button>
           </li>
