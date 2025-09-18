@@ -1,9 +1,7 @@
 // src/components/Hero.tsx
 import React from "react";
-import { useI18n } from "../i18n";
-
 const Hero: React.FC = () => {
-  const { t } = useI18n();
+  // const { t } = useI18n();
   return (
     <section
       className="text-center relative w-full rounded-lg overflow-hidden shadow-sm mb-6 bg-white dark:bg-gray-800 dark:text-gray-100 transition-colors duration-300"

@@ -235,20 +235,20 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getInci
     // Append user message
     const userMessage: Message = {
       author: user,
-      text: msg.text,
+      text: msg.text ?? "",
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+  setMessages((prev) => [...prev, userMessage]);
 
     // Optionally call onSearch with the user's message text
     if (onSearch) {
-      onSearch(msg.text);
+      onSearch(msg.text ?? "");
     }
 
     try {
       // Process the message and get the result
-      const result = await processNaturalLanguage(msg.text);
+  const result = await processNaturalLanguage(msg.text ?? "");
 
       // Optionally call onFilterChange if a filter is present
       if (typeof result.filter !== "undefined" && onFilterChange) {
@@ -258,11 +258,11 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getInci
       // Add assistant response
       const assistantMessage: Message = {
         author: { id: 1, name: "MineSafe Assistant" },
-        text: result.response,
+        text: result.response ?? "",
         timestamp: new Date(),
       };
 
-      setMessages((prev) => [...prev, assistantMessage]);
+  setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       // Error response
       const errorMessage: Message = {

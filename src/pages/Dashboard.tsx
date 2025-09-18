@@ -73,8 +73,6 @@ const Dashboard: React.FC<DashboardProps> = ({
   const pdfExportRef = useRef<any>(null);
   const excelExportRef = useRef<any>(null);
 
-  // Download handlers
-  const handleDownloadAll = () => setDownloadDialogOpen && setDownloadDialogOpen(true);
   const handleDownload = (type: 'pdf' | 'excel') => {
     setDownloadDialogOpen(false);
     setTimeout(() => {

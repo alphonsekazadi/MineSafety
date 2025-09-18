@@ -6,7 +6,7 @@ import Monitoring from "./pages/Monitoring";
 import Settings from "./pages/Settings";
 import ChatPanel from "./components/ChatPanel";
 import "@progress/kendo-theme-default/dist/all.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 function App() {
