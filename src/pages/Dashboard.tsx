@@ -20,9 +20,9 @@ import IncidentForm from "../components/IncidentForm";
 
 const Dashboard: React.FC<DashboardProps> = ({
   incidentDialogOpen,
-  setIncidentDialogOpen,
+  setIncidentDialogOpen = () => {},
   downloadDialogOpen,
-  setDownloadDialogOpen
+  setDownloadDialogOpen = () => {}
 }) => {
 
   // Quick stats
@@ -115,13 +115,17 @@ const Dashboard: React.FC<DashboardProps> = ({
             <div className="text-sm text-gray-500 mb-2">Severity Distribution</div>
             <Chart style={{ height: 180 }}>
               <ChartSeries>
-                <ChartSeriesItem type="pie" data={severityCounts} field="value" categoryField="category"
-                  data={severities.map((s, idx) => ({ category: s, value: severityCounts[idx] }))} />
+                <ChartSeriesItem
+                  type="pie"
+                  data={severities.map((s, idx) => ({ category: s, value: severityCounts[idx] }))}
+                  field="value"
+                  categoryField="category"
+                />
               </ChartSeries>
               <ChartLegend position="bottom" visible={true} />
             </Chart>
           </div>
-
+      
           {/* Trend by Month */}
           <div className="bg-white rounded-lg shadow p-4">
             <div className="text-sm text-gray-500 mb-2">Incidents by Month</div>

@@ -6,7 +6,7 @@ import { Button } from "@progress/kendo-react-buttons";
 const Sidebar: React.FC = () => {
   return (
     <aside
-      className="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-green-900 to-blue-900 text-white p-4 min-h-screen fixed left-0 top-0 z-40"
+      className="hidden md:flex md:flex-col w-64 bg-gray-800 text-white p-4 min-h-screen fixed left-0 top-0 z-40"
       aria-label="Sidebar"
     >
       <div className="flex items-center gap-3 mb-6">
