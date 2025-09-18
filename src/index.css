@@ -1,3 +1,127 @@
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0.5; }
+  to { transform: translateX(0); opacity: 1; }
+}
+body {
+  background-color: #f3f4f6;
+  transition: background-color 0.3s;
+}
+
+html.dark body {
+  background-color: #18181b;
+}
+/* Custom styles for IncidentForm */
+.incident-form {
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+}
+.incident-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+.incident-form .k-input,
+.incident-form .k-picker,
+.incident-form .k-dropdown,
+.incident-form textarea {
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  font-size: 0.97rem;
+}
+.incident-form .k-input:focus,
+.incident-form .k-picker:focus,
+.incident-form .k-dropdown:focus,
+.incident-form textarea:focus {
+  border-color: #ea5a51;
+  box-shadow: 0 0 0 2px #fdefee;
+}
+.incident-form .k-button {
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+}
+.incident-form .k-button[disabled] {
+  background: #e5e7eb;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+/* Custom styles for IncidentGrid filter bar */
+.incident-grid .incident-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  align-items: flex-end;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem 0.5rem 1.25rem;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.03);
+}
+.incident-grid .incident-filters label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+.incident-grid .incident-filters .k-input,
+.incident-grid .incident-filters .k-picker,
+.incident-grid .incident-filters .k-dropdown {
+  border-radius: 0.5rem;
+  min-width: 120px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  font-size: 0.97rem;
+}
+.incident-grid .incident-filters .k-input:focus,
+.incident-grid .incident-filters .k-picker:focus,
+.incident-grid .incident-filters .k-dropdown:focus {
+  border-color: #ea5a51;
+  box-shadow: 0 0 0 2px #fdefee;
+}
+/* Custom styles for IncidentGrid */
+.incident-grid .k-grid {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+  font-size: 0.97rem;
+  background: #fff;
+}
+.incident-grid .k-grid-header {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.incident-grid .k-grid-table tr {
+  transition: background 0.2s;
+}
+.incident-grid .k-grid-table tr:hover {
+  background: #f1f5f9;
+}
+.incident-grid .k-grid-content {
+  background: #fff;
+}
+.incident-grid .k-grid td {
+  border-bottom: 1px solid #e5e7eb;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.incident-grid .k-grid .k-grid-pager {
+  background: #f8fafc;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+.incident-grid .k-grid .k-link {
+  color: #ea5a51;
+}
+.incident-grid .k-grid .k-state-selected {
+  background: #fdefee !important;
+}
 @import 'tailwindcss';
 /* Kendo theme import */
 @import "@progress/kendo-theme-default/dist/all.css";

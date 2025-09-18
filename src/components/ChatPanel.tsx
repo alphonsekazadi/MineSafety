@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useI18n } from '../i18n';
 import { Chat, Message } from '@progress/kendo-react-conversational-ui';
 import { Button } from '@progress/kendo-react-buttons';
 
@@ -8,13 +9,16 @@ interface ChatPanelProps {
   getIncidentStats?: () => Promise<{ today: number; mostCommonType: string }>;
 }
 
-const initialMessages: Message[] = [
-  {
-    author: { id: 1, name: 'MineSafe Assistant' },
-    text: "Hi! I can help you filter incidents or answer questions. Try: 'Show critical incidents', 'How many incidents today?', 'What is the most common incident type?', 'Filter by location: Main Shaft', or 'Help'.",
-    timestamp: new Date(),
-  },
-];
+
+function getInitialMessages(t: (key: string) => string) {
+  return [
+    {
+      author: { id: 1, name: 'MineSafe Assistant' },
+      text: t('chatbotInitial'),
+      timestamp: new Date(),
+    },
+  ];
+}
 
 // Expanded command mappings and Q&A
 const commandMappings = {
@@ -88,14 +92,7 @@ const commandMappings = {
   },
   "help|what can you do|options|commands": {
     filter: undefined,
-    response: `🤖 **Available Commands:**\n
-• **Filter by severity:** "Show critical/high/medium/low incidents"
-• **Filter by time:** "Show incidents from today/yesterday/this week/this month"
-• **Filter by location:** "Show incidents at Main Shaft" or "Filter by location: Tunnel B"
-• **Filter by type:** "Show equipment incidents" or "Filter by type: Injury"
-• **Statistics:** "How many incidents today?" or "Most common incident type?"
-• **Clear filters:** "Clear filters" or "Reset filters"
-• **General help:** "Help" or "What can you do?"`
+    response: null, // Will be filled dynamically with t('chatbotHelp')
   },
   "hello|hi|hey|greetings": {
     filter: undefined,
@@ -108,8 +105,22 @@ const commandMappings = {
 };
 
 const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getIncidentStats }) => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const { t, language } = useI18n();
+  const [messages, setMessages] = useState<Message[]>(getInitialMessages(t));
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  // Reset initial message when language changes
+  useEffect(() => {
+    setMessages(getInitialMessages(t));
+  }, [language]);
+  // Custom send handler for fixed input
+  const handleSend = () => {
+    const text = inputValue.trim();
+    if (!text) return;
+    handleSendMessage({ message: { text } });
+    setInputValue("");
+  };
 
   const user = { id: 0, name: "You" };
 
@@ -197,6 +208,9 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getInci
     // Predefined command mappings
     for (const [pattern, mapping] of Object.entries(commandMappings)) {
       if (new RegExp(pattern).test(lowerText)) {
+        if (pattern.includes('help')) {
+          return { ...mapping, response: t('chatbotHelp') };
+        }
         return mapping;
       }
     }
@@ -279,8 +293,8 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getInci
 
       {/* Chat window */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 h-96 bg-white rounded-lg shadow-xl overflow-hidden flex flex-col border border-gray-200">
-          <div className="p-3 border-b bg-gradient-to-r from-blue-600 to-green-600 text-white">
+        <div className="fixed bottom-24 right-6 z-50 w-80 h-96 bg-white rounded-lg shadow-xl flex flex-col border border-gray-200 chatpanel-window">
+          <div className="p-3 border-b bg-gray-700 text-white">
             <div className="font-semibold flex items-center gap-2">
               <span>🤖</span>
               MineSafe Assistant
@@ -295,16 +309,30 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onFilterChange, onSearch, getInci
               </Button>
             </div>
           </div>
-
-          <Chat
-            user={user}
-            messages={messages}
-            onMessageSend={handleSendMessage}
-            placeholder="Type a command or question..."
-            width={"100%"}
-            height={"100%"}
-            style={{ maxHeight: '100%' }}
-          />
+          <div className="flex-1 min-h-0 relative flex flex-col">
+            <div className="flex-1 overflow-y-auto">
+              <Chat
+                user={user}
+                messages={messages}
+                onMessageSend={handleSendMessage}
+                width={"100%"}
+                showToolbar={false}
+              />
+            </div>
+            <div className="absolute bottom-0 left-0 w-full bg-white p-2 border-t border-gray-200 flex items-center chatpanel-inputbar">
+              {/* Custom input and send button */}
+              <input
+                type="text"
+                className="flex-1 border rounded px-2 py-1 mr-2 focus:outline-none focus:ring"
+                placeholder="Type a command or question..."
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleSend(); }}
+                autoFocus
+              />
+              <Button themeColor="primary" onClick={handleSend} disabled={!inputValue.trim()}>Send</Button>
+            </div>
+          </div>
         </div>
       )}
     </>

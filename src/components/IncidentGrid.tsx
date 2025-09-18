@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
+import { useI18n } from "../i18n";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
-import { incidents } from "../data/incidents";
+// import { incidents } from "../data/incidents";
 import { process, State } from "@progress/kendo-data-query";
 // ...existing code...
 import { ExcelExport } from '@progress/kendo-react-excel-export';
@@ -17,9 +18,10 @@ const severityOptions = ["All", "Low", "Medium", "High", "Critical"];
 interface IncidentGridProps {
   pdfExportTrigger?: (cb: () => void) => void;
   excelExportTrigger?: (cb: () => void) => void;
+  incidents: any[];
 }
 
-const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExportTrigger }) => {
+const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExportTrigger, incidents }) => {
   const [dataState, setDataState] = useState<State>({
     take: 7,
     skip: 0,
@@ -59,20 +61,21 @@ const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExpo
 
 // ...existing code...
 
+  const { t } = useI18n();
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+  <div className="incident-grid bg-white dark:bg-gray-800 dark:text-gray-100 rounded-lg shadow p-4 transition-colors duration-300">
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-4 items-end">
+  <div className="incident-filters">
         <div>
-          <label className="block text-xs font-semibold mb-1">Start Date</label>
+          <label className="block text-xs font-semibold mb-1">{t("startDate")}</label>
           <DatePicker value={startDate} onChange={e => setStartDate(e.value)} format="yyyy-MM-dd" />
         </div>
         <div>
-          <label className="block text-xs font-semibold mb-1">End Date</label>
+          <label className="block text-xs font-semibold mb-1">{t("endDate")}</label>
           <DatePicker value={endDate} onChange={e => setEndDate(e.value)} format="yyyy-MM-dd" />
         </div>
         <div>
-          <label className="block text-xs font-semibold mb-1">Type</label>
+          <label className="block text-xs font-semibold mb-1">{t("type")}</label>
           <DropDownList
             data={typeOptions}
             value={typeFilter}
@@ -81,7 +84,7 @@ const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExpo
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold mb-1">Severity</label>
+          <label className="block text-xs font-semibold mb-1">{t("severity")}</label>
           <DropDownList
             data={severityOptions}
             value={severityFilter}
