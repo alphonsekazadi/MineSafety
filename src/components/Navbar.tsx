@@ -1,5 +1,7 @@
+
 import React from "react";
 import { Button } from "@progress/kendo-react-buttons";
+// @ts-ignore
 import logo from "../assets/logo.svg";
 
 

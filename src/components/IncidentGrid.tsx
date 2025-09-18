@@ -1,17 +1,14 @@
 import React, { useRef, useState } from "react";
-import { Grid, GridColumn, GridToolbar } from "@progress/kendo-react-grid";
+import { Grid, GridColumn } from "@progress/kendo-react-grid";
 import { incidents } from "../data/incidents";
 import { process, State } from "@progress/kendo-data-query";
-import { Button, DropDownButton } from "@progress/kendo-react-buttons";
+// ...existing code...
 import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { DatePicker } from '@progress/kendo-react-dateinputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 
-interface ProcessedData {
-  data: any[];
-  total: number;
-}
+// ...existing code...
 
 
 const typeOptions = ["All", "Injury", "Equipment", "Near-Miss", "Environmental"];
@@ -60,13 +57,7 @@ const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExpo
     if (excelExportTrigger) excelExportTrigger(() => excelExportRef.current.save());
   }, [pdfExportTrigger, excelExportTrigger]);
 
-  const handleExportToPDF = () => {
-    pdfExportRef.current.save();
-  };
-
-  const handleExportToExcel = () => {
-    excelExportRef.current.save();
-  };
+// ...existing code...
 
   return (
     <div className="bg-white rounded-lg shadow p-4">
