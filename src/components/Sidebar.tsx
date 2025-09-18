@@ -14,19 +14,7 @@ const Sidebar: React.FC = () => {
         <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
           MS
         </div>
-        <div className="flex items-center ml-auto">
-          <span className="mr-2 text-sm">Dark Mode</span>
-          <Switch
-            checked={document.documentElement.classList.contains('dark')}
-            onChange={() => {
-              const isDark = document.documentElement.classList.toggle('dark');
-              localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            }}
-            aria-label="Toggle dark mode"
-          />
-        </div>
       </div>
-
       <nav className="flex-1">
         <ul className="space-y-2">
           <li>
@@ -40,8 +28,8 @@ const Sidebar: React.FC = () => {
             </Button>
           </li>
           <li>
-            <Button fillMode="solid" themeColor={"primary"} className="bg-blue-300 w-full justify-start" aria-label="Maintenance button">
-              Maintenance
+            <Button fillMode="solid" themeColor={"primary"} className="w-full justify-start" aria-label="Maintenance button">
+              Settings
             </Button>
           </li>
         </ul>

@@ -3,7 +3,8 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import ChatPanel from "./components/ChatPanel";
-import React, { useState } from "react";
+import "@progress/kendo-theme-default/dist/all.css";
+import react, { useState } from "react";
 
 function App() {
   const [incidentDialogOpen, setIncidentDialogOpen] = useState(false);

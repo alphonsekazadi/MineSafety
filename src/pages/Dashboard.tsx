@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import Hero from "../components/Hero";
 import StatsCard from "../components/StatsCard";
 import IncidentGrid from "../components/IncidentGrid";
+import ChatPanel from "../components/ChatPanel";
 import { Dialog, DialogActionsBar } from "@progress/kendo-react-dialogs";
 import { Notification, NotificationGroup } from "@progress/kendo-react-notification";
 import { Chart, ChartSeries, ChartSeriesItem, ChartLegend, ChartCategoryAxis, ChartCategoryAxisItem } from "@progress/kendo-react-charts";
