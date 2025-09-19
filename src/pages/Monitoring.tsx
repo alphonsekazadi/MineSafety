@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { ProgressBar } from "@progress/kendo-react-progressbars";
 import { Notification } from "@progress/kendo-react-notification";
@@ -37,9 +36,15 @@ const Monitoring: React.FC = () => {
 
   // Example OrgChart data
   const orgData = [
-    { id: 1, name: "Mine Supervisor", title: "Supervisor" },
-    { id: 2, name: "Safety Officer", title: "Officer", parentId: 1 },
-    { id: 3, name: "Worker", title: "Worker", parentId: 2 },
+    { id: 1, name: "Mine Supervisor", title: "Supervisor", avatar:
+      'https://demos.telerik.com/kendo-ui/content/web/treelist/people/1.jpg',
+    },
+    { id: 2, name: "Safety Officer", title: "Officer", parentId: 1, avatar:
+      'https://demos.telerik.com/kendo-ui/content/web/treelist/people/2.jpg',
+    },
+    { id: 3, name: "Worker", title: "Worker", parentId: 2, avatar:
+      'https://demos.telerik.com/kendo-ui/content/web/treelist/people/3.jpg',
+    },
   ];
 
   const { t } = useI18n();
