@@ -1,3 +1,7 @@
+@import 'tailwindcss';
+/* Kendo theme import */
+@import "@progress/kendo-theme-default/dist/all.css";
+
 @keyframes slideInLeft {
   from { transform: translateX(-100%); opacity: 0.5; }
   to { transform: translateX(0); opacity: 1; }
@@ -122,9 +126,6 @@ html.dark body {
 .incident-grid .k-grid .k-state-selected {
   background: #fdefee !important;
 }
-@import 'tailwindcss';
-/* Kendo theme import */
-@import "@progress/kendo-theme-default/dist/all.css";
 
 /* small helper */
 html, body, #root { height: 100%; }
