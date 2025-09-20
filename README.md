@@ -1,6 +1,6 @@
 
 # Mine Safety & Incident Tracker Dashboard
-
+![MineSafety App Screenshot](./public/app.png)
 Mining operations in the DRC (Democratic Republic of Congo) face frequent safety challenges. **MineSafety** provides a digital platform for workers and managers to quickly log incidents, monitor risks, and visualize safety data—helping make mines safer, more transparent, and more responsive.
 
 ## 🚩 Problem Solved
@@ -92,8 +92,6 @@ MineSafety/
 - **src/main.tsx**: Vite entry point
 - **src/index.css**: TailwindCSS and global styles
 - **src/i18n.tsx**: Internationalization (i18n) context/provider
-
-## 📸 Screenshots
 
 ## 🔧 Getting Started
 
