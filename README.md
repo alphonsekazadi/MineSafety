@@ -95,8 +95,6 @@ MineSafety/
 
 ## 📸 Screenshots
 
-*(Add annotated screenshots of your dashboard, incident form, heatmap, and chatbot here!)*
-
 ## 🔧 Getting Started
 
 1. **Install dependencies:**
