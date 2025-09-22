@@ -189,8 +189,8 @@ const Dashboard: React.FC<DashboardProps> = ({
         <Dialog title={t("downloadAllData") } onClose={() => setDownloadDialogOpen(false)}>
           <div className="mb-4">{t("chooseFormat")}</div>
           <DialogActionsBar>
-            <Button onClick={() => handleDownload('pdf')}>{t("pdf")}</Button>
-            <Button onClick={() => handleDownload('excel')}>{t("excel")}</Button>
+            <Button themeColor="primary" onClick={() => handleDownload('pdf')}>{t("pdf")}</Button>
+            <Button themeColor="success" onClick={() => handleDownload('excel')}>{t("excel")}</Button>
             <Button onClick={() => setDownloadDialogOpen(false)}>{t("cancel")}</Button>
           </DialogActionsBar>
         </Dialog>
