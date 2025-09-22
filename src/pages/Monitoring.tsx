@@ -7,7 +7,39 @@ import { ListView } from "@progress/kendo-react-listview";
 import { OrgChart } from "@progress/kendo-react-orgchart";
 import { Button } from "@progress/kendo-react-buttons";
 import { Dialog } from "@progress/kendo-react-dialogs";
-import { incidents as staticIncidents, Incident } from "../data/incidents";
+import { incidents as staticIncidents, Incident, incidents } from "../data/incidents";
+// KendoReact Map imports
+import { Map, MapLayers, MapTileLayer, MapMarkerLayer } from "@progress/kendo-react-map";
+import "@progress/kendo-theme-default/dist/all.css";
+
+// RDC location name to coordinates (latitude, longitude)
+const RDC_LOCATIONS: Record<string, [number, number]> = {
+  "Kinshasa": [-4.325, 15.322],
+  "Lubumbashi": [-11.687, 27.502],
+  "Kolwezi": [-10.716, 25.472],
+  "Likasi": [-10.983, 26.733],
+  "Kamituga": [-3.430, 27.000],
+  "Goma": [-1.678, 29.222],
+  "Bukavu": [-2.503, 28.860],
+  "Mbuji-Mayi": [-6.136, 23.589],
+  "Kananga": [-5.896, 22.417],
+  "Tshikapa": [-6.416, 20.799],
+  // Add more as needed
+};
+// Incidents with known RDC location coordinates
+const getRDCIncidents = (incidents: Incident[]) =>
+  incidents.filter((i) => RDC_LOCATIONS[i.location]);
+  // RDC incidents for the map
+  const rdcIncidents = getRDCIncidents(incidents);
+
+  // Map tile URL and attribution
+  const tileUrl = (e: any) => `https://tile.openstreetmap.org/${e.zoom}/${e.x}/${e.y}.png`;
+  const attribution = "© OpenStreetMap contributors";
+
+  // Center RDC (example: Kinshasa)
+  const mapCenter = rdcIncidents.length
+    ? RDC_LOCATIONS[rdcIncidents[0].location]
+    : [-4.325, 15.322]; // fallback to Kinshasa
 import { useI18n } from "../i18n";
 
 const getLiveIncidents = () => {
@@ -79,6 +111,30 @@ const Monitoring: React.FC = () => {
         <div className="mt-8 bg-gray-50 dark:bg-gray-700 rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">{t("orgChart")}</h2>
           <OrgChart style={{ height: 200, borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }} data={orgData} />
+        </div>
+        {/* RDC Map Visualization */}
+        <div className="mt-8 bg-gray-50 dark:bg-gray-700 rounded-lg shadow p-4">
+          <h2 className="text-lg font-semibold mb-2">{t("incidentsMap") || "Incidents Map (RDC)"}</h2>
+          <div style={{ height: 350, borderRadius: 12, overflow: "hidden" }}>
+            <Map
+              center={mapCenter}
+              zoom={6}
+              style={{ height: "100%", width: "100%", borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+            >
+              <MapLayers>
+                <MapTileLayer urlTemplate={tileUrl} attribution={attribution} />
+                <MapMarkerLayer
+                  data={rdcIncidents.map((incident) => ({
+                    ...incident,
+                    markerLocation: RDC_LOCATIONS[incident.location],
+                    markerTitle: incident.location
+                  }))}
+                  locationField="markerLocation"
+                  titleField="markerTitle"
+                />
+              </MapLayers>
+            </Map>
+          </div>
         </div>
       </div>
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
