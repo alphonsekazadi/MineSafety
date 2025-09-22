@@ -1,16 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useI18n } from "../i18n";
 import { Grid, GridColumn } from "@progress/kendo-react-grid";
-// import { incidents } from "../data/incidents";
 import { process, State } from "@progress/kendo-data-query";
-// ...existing code...
 import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { DatePicker } from '@progress/kendo-react-dateinputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
-
-// ...existing code...
-
 
 const typeOptions = ["All", "Injury", "Equipment", "Near-Miss", "Environmental"];
 const severityOptions = ["All", "Low", "Medium", "High", "Critical"];
@@ -58,8 +53,6 @@ const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExpo
     if (pdfExportTrigger) pdfExportTrigger(() => pdfExportRef.current.save());
     if (excelExportTrigger) excelExportTrigger(() => excelExportRef.current.save());
   }, [pdfExportTrigger, excelExportTrigger]);
-
-// ...existing code...
 
   const { t } = useI18n();
   return (
@@ -109,7 +102,7 @@ const IncidentGrid: React.FC<IncidentGridProps> = ({ pdfExportTrigger, excelExpo
           }}
         >
           {/* No toolbar, export and add moved to Navbar */}
-          <GridColumn field="id" title="#" width="60px" />
+          <GridColumn field="id" title="N°" width="60px" />
           <GridColumn field="date" title="Date" cells={{ data: DateCell }} />
           <GridColumn field="location" title="Location" />
           <GridColumn field="type" title="Type" />
