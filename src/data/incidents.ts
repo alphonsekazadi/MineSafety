@@ -46,5 +46,4 @@ export const incidents: Incident[] = [
     description: "Spill near tailings pond, requires containment.",
     reporter: "Ops Team",
   },
-  // add more sample rows...
 ];
