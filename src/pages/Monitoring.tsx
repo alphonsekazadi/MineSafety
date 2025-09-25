@@ -24,7 +24,6 @@ const RDC_LOCATIONS: Record<string, [number, number]> = {
   "Mbuji-Mayi": [-6.136, 23.589],
   "Kananga": [-5.896, 22.417],
   "Tshikapa": [-6.416, 20.799],
-  // Add more as needed
 };
 // Incidents with known RDC location coordinates
 const getRDCIncidents = (incidents: Incident[]) =>
@@ -36,14 +35,14 @@ const getRDCIncidents = (incidents: Incident[]) =>
   const tileUrl = (e: any) => `https://tile.openstreetmap.org/${e.zoom}/${e.x}/${e.y}.png`;
   const attribution = "© OpenStreetMap contributors";
 
-  // Center RDC (example: Kinshasa)
+  // Center DRC
   const mapCenter = rdcIncidents.length
     ? RDC_LOCATIONS[rdcIncidents[0].location]
     : [-4.325, 15.322]; // fallback to Kinshasa
 import { useI18n } from "../i18n";
 
 const getLiveIncidents = () => {
-  // Simulate real-time updates by shuffling and adding a new incident every 5s
+ 
   const stored = localStorage.getItem("incidents");
   let data: Incident[] = stored ? JSON.parse(stored) : staticIncidents;
   return data;
